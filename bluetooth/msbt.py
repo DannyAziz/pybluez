@@ -11,6 +11,7 @@ def discover_devices (duration=8, flush_cache=True, lookup_names=False,
     btAddresIndex = 0
     namesIndex = 1
     classIndex = 2
+    connectedIndex = 3
 
     try:
         devices = bt.discover_devices(duration=duration, flush_cache=flush_cache)
@@ -23,6 +24,7 @@ def discover_devices (duration=8, flush_cache=True, lookup_names=False,
             item.append(device[namesIndex])
         if lookup_class:
             item.append(device[classIndex])
+        item.append(device[connectedIndex])
 
         if len(item) == 1: # in case of address-only we return string not tuple
             ret.append(item[0])

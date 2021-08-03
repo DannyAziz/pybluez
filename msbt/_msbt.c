@@ -500,13 +500,15 @@ msbt_discover_devices(PyObject *self, PyObject *args, PyObject *kwds)
         BTH_ADDR result = device_info.Address.ullLong;
         ba2str( result, buf, _countof(buf) );
 
-        tup = PyTuple_New(3);
+        tup = PyTuple_New(4);
         item_tuple = PyUnicode_FromString(buf);
         PyTuple_SetItem( tup, 0, item_tuple );
         item_tuple = PyUnicode_FromWideChar(device_info.szName, -1);
         PyTuple_SetItem( tup, 1, item_tuple );
         item_tuple = PyLong_FromLong(device_info.ulClassofDevice);
         PyTuple_SetItem( tup, 2, item_tuple );
+        item_tuple = PyBool_FromLong(device_info.fConnected);
+        PyTuple_SetItem( tup, 3, item_tuple );
         PyList_Append( toreturn, tup );
         Py_DECREF( tup );
         
